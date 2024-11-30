@@ -18,8 +18,16 @@ func (k msgServer) UpdatePost(goCtx context.Context, msg *types.MsgUpdatePost) (
 	if !found {
 		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.Id))
 	}
-	if msg.Creator != val.Creator {
-		return nil, errorsmod.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
+	// Check if the message sender is authorized
+	isAuthorized := msg.Creator == val.Creator
+	for _, updater := range val.GrantedUpdaters {
+		if msg.Creator == updater {
+			isAuthorized = true
+			break
+		}
+	}
+	if !isAuthorized {
+		return nil, errorsmod.Wrap(sdkerrors.ErrUnauthorized, "you do not have permission to update this post")
 	}
 	// Update only the mutable fields
 	val.Title = msg.Title

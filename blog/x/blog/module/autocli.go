@@ -60,6 +60,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a delete-post tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
 				},
+				{
+					RpcMethod:      "GrantPermission",
+					Use:            "grant-permission [id] [grantee]",
+					Short:          "Grant permission to another address to update or delete a post",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "grantee"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

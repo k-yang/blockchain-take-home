@@ -23,10 +23,13 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type Post struct {
-	Title   string `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
-	Body    string `protobuf:"bytes,2,opt,name=body,proto3" json:"body,omitempty"`
-	Creator string `protobuf:"bytes,3,opt,name=creator,proto3" json:"creator,omitempty"`
-	Id      uint64 `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
+	Title           string   `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	Body            string   `protobuf:"bytes,2,opt,name=body,proto3" json:"body,omitempty"`
+	Creator         string   `protobuf:"bytes,3,opt,name=creator,proto3" json:"creator,omitempty"`
+	Id              uint64   `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
+	CreatedAt       string   `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	LastUpdatedAt   string   `protobuf:"bytes,6,opt,name=last_updated_at,json=lastUpdatedAt,proto3" json:"last_updated_at,omitempty"`
+	GrantedUpdaters []string `protobuf:"bytes,7,rep,name=granted_updaters,json=grantedUpdaters,proto3" json:"granted_updaters,omitempty"`
 }
 
 func (m *Post) Reset()         { *m = Post{} }
@@ -90,6 +93,27 @@ func (m *Post) GetId() uint64 {
 	return 0
 }
 
+func (m *Post) GetCreatedAt() string {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return ""
+}
+
+func (m *Post) GetLastUpdatedAt() string {
+	if m != nil {
+		return m.LastUpdatedAt
+	}
+	return ""
+}
+
+func (m *Post) GetGrantedUpdaters() []string {
+	if m != nil {
+		return m.GrantedUpdaters
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*Post)(nil), "blog.blog.Post")
 }
@@ -97,18 +121,22 @@ func init() {
 func init() { proto.RegisterFile("blog/blog/post.proto", fileDescriptor_8f060607f92e3b72) }
 
 var fileDescriptor_8f060607f92e3b72 = []byte{
-	// 166 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x49, 0xca, 0xc9, 0x4f,
-	0xd7, 0x07, 0x13, 0x05, 0xf9, 0xc5, 0x25, 0x7a, 0x05, 0x45, 0xf9, 0x25, 0xf9, 0x42, 0x9c, 0x20,
-	0x01, 0x3d, 0x10, 0xa1, 0x14, 0xc5, 0xc5, 0x12, 0x90, 0x5f, 0x5c, 0x22, 0x24, 0xc2, 0xc5, 0x5a,
-	0x92, 0x59, 0x92, 0x93, 0x2a, 0xc1, 0xa8, 0xc0, 0xa8, 0xc1, 0x19, 0x04, 0xe1, 0x08, 0x09, 0x71,
-	0xb1, 0x24, 0xe5, 0xa7, 0x54, 0x4a, 0x30, 0x81, 0x05, 0xc1, 0x6c, 0x21, 0x09, 0x2e, 0xf6, 0xe4,
-	0xa2, 0xd4, 0xc4, 0x92, 0xfc, 0x22, 0x09, 0x66, 0xb0, 0x30, 0x8c, 0x2b, 0xc4, 0xc7, 0xc5, 0x94,
-	0x99, 0x22, 0xc1, 0xa2, 0xc0, 0xa8, 0xc1, 0x12, 0xc4, 0x94, 0x99, 0xe2, 0xa4, 0x7d, 0xe2, 0x91,
-	0x1c, 0xe3, 0x85, 0x47, 0x72, 0x8c, 0x0f, 0x1e, 0xc9, 0x31, 0x4e, 0x78, 0x2c, 0xc7, 0x70, 0xe1,
-	0xb1, 0x1c, 0xc3, 0x8d, 0xc7, 0x72, 0x0c, 0x51, 0x82, 0x60, 0x17, 0x55, 0x40, 0x1c, 0x56, 0x52,
-	0x59, 0x90, 0x5a, 0x9c, 0xc4, 0x06, 0x76, 0x9a, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0xfa, 0xbd,
-	0x65, 0x52, 0xb2, 0x00, 0x00, 0x00,
+	// 239 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x34, 0x90, 0xc1, 0x4a, 0xc3, 0x40,
+	0x10, 0x86, 0xb3, 0x69, 0xda, 0x92, 0x01, 0xad, 0x0e, 0x3d, 0xec, 0xc5, 0x25, 0x78, 0x90, 0x88,
+	0x50, 0x0f, 0x3e, 0x41, 0x7d, 0x02, 0x09, 0xf4, 0xe2, 0xa5, 0x24, 0x6e, 0x28, 0x81, 0xe0, 0x2e,
+	0xbb, 0x23, 0xd8, 0xb7, 0xf0, 0xb1, 0x3c, 0x78, 0xe8, 0xd1, 0xa3, 0x24, 0x2f, 0x22, 0x3b, 0x9b,
+	0x5e, 0x7e, 0xe6, 0xff, 0xe6, 0x3b, 0xfd, 0xb0, 0x6e, 0x7a, 0x73, 0x78, 0xe4, 0xb0, 0xc6, 0xd3,
+	0xc6, 0x3a, 0x43, 0x06, 0xf3, 0x00, 0x36, 0x21, 0x6e, 0x7f, 0x04, 0x64, 0x2f, 0xc6, 0x13, 0xae,
+	0x61, 0x4e, 0x1d, 0xf5, 0xad, 0x14, 0x85, 0x28, 0xf3, 0x2a, 0x16, 0x44, 0xc8, 0x1a, 0xa3, 0x8f,
+	0x32, 0x65, 0xc8, 0x37, 0x4a, 0x58, 0xbe, 0xb9, 0xb6, 0x26, 0xe3, 0xe4, 0x8c, 0xf1, 0xb9, 0xe2,
+	0x25, 0xa4, 0x9d, 0x96, 0x59, 0x21, 0xca, 0xac, 0x4a, 0x3b, 0x8d, 0x37, 0x00, 0xfc, 0x6a, 0xf5,
+	0xbe, 0x26, 0x39, 0x67, 0x39, 0x9f, 0xc8, 0x96, 0xf0, 0x0e, 0x56, 0x7d, 0xed, 0x69, 0xff, 0x61,
+	0xf5, 0xd9, 0x59, 0xb0, 0x73, 0x11, 0xf0, 0x2e, 0xd2, 0x2d, 0xe1, 0x3d, 0x5c, 0x1d, 0x5c, 0xfd,
+	0x1e, 0x94, 0xa8, 0x3a, 0x2f, 0x97, 0xc5, 0xac, 0xcc, 0xab, 0xd5, 0xc4, 0x77, 0x13, 0x7e, 0x7e,
+	0xf8, 0x1e, 0x94, 0x38, 0x0d, 0x4a, 0xfc, 0x0d, 0x4a, 0x7c, 0x8d, 0x2a, 0x39, 0x8d, 0x2a, 0xf9,
+	0x1d, 0x55, 0xf2, 0x7a, 0xcd, 0x23, 0x7c, 0xc6, 0x2d, 0xe8, 0x68, 0x5b, 0xdf, 0x2c, 0x78, 0x8d,
+	0xa7, 0xff, 0x00, 0x00, 0x00, 0xff, 0xff, 0x5e, 0x60, 0xaf, 0x06, 0x25, 0x01, 0x00, 0x00,
 }
 
 func (m *Post) Marshal() (dAtA []byte, err error) {
@@ -131,6 +159,29 @@ func (m *Post) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if len(m.GrantedUpdaters) > 0 {
+		for iNdEx := len(m.GrantedUpdaters) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.GrantedUpdaters[iNdEx])
+			copy(dAtA[i:], m.GrantedUpdaters[iNdEx])
+			i = encodeVarintPost(dAtA, i, uint64(len(m.GrantedUpdaters[iNdEx])))
+			i--
+			dAtA[i] = 0x3a
+		}
+	}
+	if len(m.LastUpdatedAt) > 0 {
+		i -= len(m.LastUpdatedAt)
+		copy(dAtA[i:], m.LastUpdatedAt)
+		i = encodeVarintPost(dAtA, i, uint64(len(m.LastUpdatedAt)))
+		i--
+		dAtA[i] = 0x32
+	}
+	if len(m.CreatedAt) > 0 {
+		i -= len(m.CreatedAt)
+		copy(dAtA[i:], m.CreatedAt)
+		i = encodeVarintPost(dAtA, i, uint64(len(m.CreatedAt)))
+		i--
+		dAtA[i] = 0x2a
+	}
 	if m.Id != 0 {
 		i = encodeVarintPost(dAtA, i, uint64(m.Id))
 		i--
@@ -191,6 +242,20 @@ func (m *Post) Size() (n int) {
 	}
 	if m.Id != 0 {
 		n += 1 + sovPost(uint64(m.Id))
+	}
+	l = len(m.CreatedAt)
+	if l > 0 {
+		n += 1 + l + sovPost(uint64(l))
+	}
+	l = len(m.LastUpdatedAt)
+	if l > 0 {
+		n += 1 + l + sovPost(uint64(l))
+	}
+	if len(m.GrantedUpdaters) > 0 {
+		for _, s := range m.GrantedUpdaters {
+			l = len(s)
+			n += 1 + l + sovPost(uint64(l))
+		}
 	}
 	return n
 }
@@ -345,6 +410,102 @@ func (m *Post) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPost
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPost
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPost
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.CreatedAt = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LastUpdatedAt", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPost
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPost
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPost
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.LastUpdatedAt = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GrantedUpdaters", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPost
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPost
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPost
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.GrantedUpdaters = append(m.GrantedUpdaters, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipPost(dAtA[iNdEx:])

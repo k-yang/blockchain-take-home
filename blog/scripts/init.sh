@@ -21,6 +21,8 @@ $BLOGD_BIN init test --chain-id blog --default-denom stake
 # update genesis
 $BLOGD_BIN genesis add-genesis-account alice 10000000stake --keyring-backend test
 $BLOGD_BIN genesis add-genesis-account bob 1000stake --keyring-backend test
+$BLOGD_BIN genesis add-genesis-account cosmos1vq7mchr8585n0a4q75c9fjr9qpfygvxz8fv2vc 3000stake --keyring-backend test
+
 # create default validator
 $BLOGD_BIN genesis gentx alice 1000000stake --chain-id blog
 $BLOGD_BIN genesis collect-gentxs

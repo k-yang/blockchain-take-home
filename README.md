@@ -17,6 +17,7 @@ Starting from the `blog` directory:
 3. Updating a post doesn't work as expected. Figure out why and fix it.
 4. Add a `created_at` and `last_updated_at` timestamp field to the blog post type, and update it with the current block time accordingly whenever a post is created or updated.
 5. Bonus: Implement a grant authorization mechanism where a post creator can allow other addresses to update or delete their post (e.g. Bob can update and delete Alice's blog posts).
+6. Create an `execution_log.md` file that includes example commands and their outputs for the implemented commands described above.
 
 ## Useful commands
 

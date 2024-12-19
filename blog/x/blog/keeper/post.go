@@ -17,6 +17,7 @@ func (k Keeper) AppendPost(ctx sdk.Context, post types.Post) uint64 {
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.PostKey))
 	appendedValue := k.cdc.MustMarshal(&post)
 	store.Set(GetPostIDBytes(post.Id), appendedValue)
+	k.SetPostCount(ctx, count+1)
 	return count
 }
 
@@ -59,7 +60,7 @@ func (k Keeper) GetPost(ctx sdk.Context, id uint64) (val types.Post, found bool)
 
 func (k Keeper) SetPost(ctx sdk.Context, post types.Post) {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.PoslKey))
+	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.PostKey))
 	b := k.cdc.MustMarshal(&post)
 	store.Set(GetPostIDBytes(post.Id), b)
 }
